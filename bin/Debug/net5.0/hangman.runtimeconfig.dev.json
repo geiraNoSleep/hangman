@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/panicmode/.dotnet/store/|arch|/|tfm|",
+      "/home/panicmode/.nuget/packages"
+    ]
+  }
+}
