@@ -25,21 +25,49 @@ namespace hangman
             Console.WriteLine(country);
             Console.WriteLine(capital);
 
+            var controler = true;
             char[] guess = new char[capital.Length];
-            Console.Write("Please enter your guess: ");
 
             for (int p = 0; p < capital.Length; p++)
                 guess[p] = '_';
 
-            while (true)
+            while (controler)
             {
-                char playerGuess = char.Parse(Console.ReadLine());
-                for (int j = 0; j < capital.Length; j++)
+                Console.WriteLine("To guess one letter type in - One, to guess whole word type in - Word");
+                string guessType = Console.ReadLine();
+                if (guessType == "One")
                 {
-                    if (playerGuess == capital[j])
-                        guess[j] = playerGuess;
+                    char playerGuess = char.Parse(Console.ReadLine());
+                    for (int j = 0; j < capital.Length; j++)
+                    {
+                        if (playerGuess == capital[j])
+                        {
+                            guess[j] = playerGuess;
+                        }
+                        else if (playerGuess != capital[j])
+                        {
+
+                        }
+                    }
+                    Console.WriteLine(guess);
                 }
-                Console.WriteLine(guess);
+                else if (guessType == "Word")
+                {
+                    Console.WriteLine("Type in your guess:");
+                    string playerWordGuess = Console.ReadLine();
+                    if (playerWordGuess == capital)
+                    {
+                        Console.WriteLine("You won!");
+                        controler = false;
+                    }
+                }
+
+                string finalGuess = new string(guess);
+
+                if (finalGuess == capital)
+                {
+                    controler = false;
+                }
             }
         }
 
