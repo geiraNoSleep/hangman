@@ -9,19 +9,123 @@ namespace ascii
         {
             Console.Title = "ASCII Art";
             string title = @"
- ____                                     ______    __    ___             
-/\  _`\                                  /\__  _\__/\ \__/\_ \            
-\ \ \L\_\ __      ___     ___   __  __   \/_/\ \/\_\ \ ,_\//\ \      __   
- \ \  _\/'__`\  /' _ `\  /'___\/\ \/\ \     \ \ \/\ \ \ \/ \ \ \   /'__`\ 
-  \ \ \/\ \L\.\_/\ \/\ \/\ \__/\ \ \_\ \     \ \ \ \ \ \ \_ \_\ \_/\  __/ 
-   \ \_\ \__/.\_\ \_\ \_\ \____\\/`____ \     \ \_\ \_\ \__\/\____\ \____\
-    \/_/\/__/\/_/\/_/\/_/\/____/ `/___/> \     \/_/\/_/\/__/\/____/\/____/
-                                    /\___/                                
-                                    \/__/                                 
-                                                                 
-            ";
+ _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                    __/ |                      
+                   |___/                      ";
 
             Console.WriteLine(title);
         }
+
+        public void hangman1()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+
+            +---+
+            |   |
+                |
+                |
+                |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
+        public void hangman2()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            +---+
+            |   |
+            O   |
+                |
+                |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
+        public void hangman3()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            +---+
+            |   |
+            O   |
+            |   |
+                |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
+        public void hangman4()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            +---+
+            |   |
+            O   |
+           /|   |
+                |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
+        public void hangman5()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            +---+
+            |   |
+            O   |
+           /|\  |
+                |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
+        public void hangman6()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            +---+
+            |   |
+            O   |
+           /|\  |
+           /    |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
+        public void hangman7()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            +---+
+            |   |
+            O   |
+           /|\  |
+           / \  |
+                |
+            =========";
+
+            Console.WriteLine(title);
+        }
+
     }
 }

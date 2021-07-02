@@ -37,6 +37,7 @@ namespace hangman
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
+            int hangmanCount = 1;
             int lifePoints = 6;
             var controler = true;
             var isNotInWord = false;
