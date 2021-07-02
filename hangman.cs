@@ -2,6 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace hangman
 {
@@ -27,10 +28,12 @@ namespace hangman
             Console.WriteLine(country);
             Console.WriteLine(capital);
 
+            string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
+
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int lifePoints = 10;
+            int lifePoints = 2;
             var controler = true;
             var isNotInWord = false;
             var guessControler = false;
@@ -54,6 +57,8 @@ namespace hangman
                 string guessType = Console.ReadLine();
                 if (guessType == "One")
                 {
+                    isInWord = false;
+                    isNotInWord = false;
                     Console.WriteLine("Type in your guess:");
                     char playerGuess = char.Parse(Console.ReadLine());
                     for (int j = 0; j < capital.Length; j++)
@@ -89,6 +94,11 @@ namespace hangman
                         guessCount = guessCount + 1;
                         Console.WriteLine("You won!");
                         Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
+                        Console.WriteLine("What's your name?");
+                        string name = Console.ReadLine();
+                        string data = name + " | " + date + " | " + elapsedTime + " | " + guessCount + " | " + capital;
+                        using StreamWriter file = new("highscores.txt", append: true);
+                        file.WriteLineAsync(data);
                         controler = false;
                     }
                     else if (playerWordGuess != capital)
@@ -112,6 +122,8 @@ namespace hangman
                     string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
                     Console.WriteLine("You won!");
                     Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
+                    Console.WriteLine("What's your name?");
+                    string name = Console.ReadLine();
                     controler = false;
                 }
                 else if (lifePoints == 0)
