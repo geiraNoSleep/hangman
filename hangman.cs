@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
+using System.Threading;
 
 namespace hangman
 {
@@ -24,6 +26,9 @@ namespace hangman
 
             Console.WriteLine(country);
             Console.WriteLine(capital);
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
 
             int lifePoints = 10;
             var controler = true;
@@ -65,7 +70,7 @@ namespace hangman
                             guessControler = true;
                         }
                     }
-                    if (isNotInWord == true && isInWord != true)
+                    if (isNotInWord == true && isInWord == false)
                     {
                         lifePoints = lifePoints - 1;
                         notInWord = notInWord + playerGuess + " ";
@@ -78,9 +83,13 @@ namespace hangman
                     string playerWordGuess = Console.ReadLine();
                     if (playerWordGuess == capital)
                     {
+                        stopWatch.Stop();
+                        TimeSpan ts = stopWatch.Elapsed;
+                        string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+                        guessCount = guessCount + 1;
                         Console.WriteLine("You won!");
+                        Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
                         controler = false;
-                        guessControler = true;
                     }
                     else if (playerWordGuess != capital)
                     {
@@ -98,8 +107,11 @@ namespace hangman
 
                 if (finalGuess == capital)
                 {
+                    stopWatch.Stop();
+                    TimeSpan ts = stopWatch.Elapsed;
+                    string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
                     Console.WriteLine("You won!");
-                    Console.WriteLine("You guessed capital after {0} guesses.", guessCount);
+                    Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
                     controler = false;
                 }
                 else if (lifePoints == 0)
