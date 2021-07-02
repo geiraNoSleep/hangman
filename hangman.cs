@@ -25,9 +25,12 @@ namespace hangman
             Console.WriteLine(country);
             Console.WriteLine(capital);
 
-            int lifePoints = 5;
+            int lifePoints = 10;
             var controler = true;
-            var ifInWord = true;
+            var isNotInWord = false;
+            var guessControler = false;
+            var isInWord = false;
+            var guessCount = 0;
             string notInWord = "";
             char[] guess = new char[capital.Length];
 
@@ -53,13 +56,16 @@ namespace hangman
                         if (playerGuess == capital[j])
                         {
                             guess[j] = playerGuess;
+                            guessControler = true;
+                            isInWord = true;
                         }
                         else if (playerGuess != capital[j])
                         {
-                            ifInWord = false;
+                            isNotInWord = true;
+                            guessControler = true;
                         }
                     }
-                    if (ifInWord == false)
+                    if (isNotInWord == true && isInWord != true)
                     {
                         lifePoints = lifePoints - 1;
                         notInWord = notInWord + playerGuess + " ";
@@ -74,11 +80,18 @@ namespace hangman
                     {
                         Console.WriteLine("You won!");
                         controler = false;
+                        guessControler = true;
                     }
                     else if (playerWordGuess != capital)
                     {
                         lifePoints = lifePoints - 2;
+                        guessControler = true;
                     }
+                }
+
+                if (guessControler == true)
+                {
+                    guessCount = guessCount + 1;
                 }
 
                 string finalGuess = new string(guess);
@@ -86,6 +99,7 @@ namespace hangman
                 if (finalGuess == capital)
                 {
                     Console.WriteLine("You won!");
+                    Console.WriteLine("You guessed capital after {0} guesses.", guessCount);
                     controler = false;
                 }
                 else if (lifePoints == 0)
