@@ -25,7 +25,9 @@ namespace hangman
             Console.WriteLine(country);
             Console.WriteLine(capital);
 
+            int lifePoints = 5;
             var controler = true;
+            var ifInWord = true;
             char[] guess = new char[capital.Length];
 
             for (int p = 0; p < capital.Length; p++)
@@ -33,10 +35,12 @@ namespace hangman
 
             while (controler)
             {
+                Console.WriteLine("You have {0} life points left!", lifePoints);
                 Console.WriteLine("To guess one letter type in - One, to guess whole word type in - Word");
                 string guessType = Console.ReadLine();
                 if (guessType == "One")
                 {
+                    Console.WriteLine("Type in your guess:");
                     char playerGuess = char.Parse(Console.ReadLine());
                     for (int j = 0; j < capital.Length; j++)
                     {
@@ -46,8 +50,12 @@ namespace hangman
                         }
                         else if (playerGuess != capital[j])
                         {
-
+                            ifInWord = false;
                         }
+                    }
+                    if (ifInWord == false)
+                    {
+                        lifePoints = lifePoints - 1;
                     }
                     Console.WriteLine(guess);
                 }
@@ -60,12 +68,17 @@ namespace hangman
                         Console.WriteLine("You won!");
                         controler = false;
                     }
+                    else if (playerWordGuess != capital)
+                    {
+                        lifePoints = lifePoints - 2;
+                    }
                 }
 
                 string finalGuess = new string(guess);
 
                 if (finalGuess == capital)
                 {
+                    Console.WriteLine("You won!");
                     controler = false;
                 }
             }
