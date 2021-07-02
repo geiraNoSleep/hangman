@@ -38,6 +38,10 @@ namespace hangman
             {
                 Console.WriteLine("You have {0} life points left!", lifePoints);
                 Console.WriteLine("Not in word: {0}", notInWord);
+                if (lifePoints == 1)
+                {
+                    Console.WriteLine("Hint: The capital of {0}.", country);
+                }
                 Console.WriteLine("To guess one letter type in - One, to guess whole word type in - Word");
                 string guessType = Console.ReadLine();
                 if (guessType == "One")
@@ -82,6 +86,11 @@ namespace hangman
                 if (finalGuess == capital)
                 {
                     Console.WriteLine("You won!");
+                    controler = false;
+                }
+                else if (lifePoints == 0)
+                {
+                    Console.WriteLine("You lost! The correct word was {0}", capital);
                     controler = false;
                 }
             }
