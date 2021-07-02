@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using ascii;
 
 namespace hangman
 {
@@ -30,10 +31,13 @@ namespace hangman
 
             string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
 
+            Generator ASCII = new Generator();
+            ASCII.welcome();
+
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int lifePoints = 2;
+            int lifePoints = 6;
             var controler = true;
             var isNotInWord = false;
             var guessControler = false;
@@ -124,6 +128,9 @@ namespace hangman
                     Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
                     Console.WriteLine("What's your name?");
                     string name = Console.ReadLine();
+                    string data = name + " | " + date + " | " + elapsedTime + " | " + guessCount + " | " + capital;
+                    using StreamWriter file = new("highscores.txt", append: true);
+                    file.WriteLineAsync(data);
                     controler = false;
                 }
                 else if (lifePoints == 0)
