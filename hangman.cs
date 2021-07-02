@@ -28,6 +28,7 @@ namespace hangman
             int lifePoints = 5;
             var controler = true;
             var ifInWord = true;
+            string notInWord = "";
             char[] guess = new char[capital.Length];
 
             for (int p = 0; p < capital.Length; p++)
@@ -36,6 +37,7 @@ namespace hangman
             while (controler)
             {
                 Console.WriteLine("You have {0} life points left!", lifePoints);
+                Console.WriteLine("Not in word: {0}", notInWord);
                 Console.WriteLine("To guess one letter type in - One, to guess whole word type in - Word");
                 string guessType = Console.ReadLine();
                 if (guessType == "One")
@@ -56,6 +58,7 @@ namespace hangman
                     if (ifInWord == false)
                     {
                         lifePoints = lifePoints - 1;
+                        notInWord = notInWord + playerGuess + " ";
                     }
                     Console.WriteLine(guess);
                 }
