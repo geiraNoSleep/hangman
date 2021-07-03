@@ -1,1 +1,3 @@
 Name | Date | Time | Guess Count | Word
+Kamil | 07-03-2021 | 00 minutes 04 seconds and 45 milliseconds | 1 | Pristina
+Kamil | 07-03-2021 | 00 minutes 19 seconds and 99 milliseconds | 5 | Bogota

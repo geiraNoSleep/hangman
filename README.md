@@ -1,1 +1,1 @@
-#hangman
+Hi. My name is Kamil. I got interested in coding in middle school. At this time I was really into web development. When I started high school I got into administrating operating systems. After some time I decided to learn more about cybersecurity. This is when I discovered that most of it is writing scripts. I wanted to make myself better at it so I just starter few minor projects. Since then I'm trying to improve and code as often as possible.

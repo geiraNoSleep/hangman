@@ -74,8 +74,9 @@ namespace hangman
             string country = words[0].Trim();
             string capital = words[1].Trim();
 
-            Console.WriteLine(country);
-            Console.WriteLine(capital);
+            //Uncomment lines below to know which country was chosen
+            //Console.WriteLine(country);
+            //Console.WriteLine(capital);
 
 
             Generator ASCII = new Generator();
