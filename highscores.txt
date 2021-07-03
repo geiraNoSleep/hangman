@@ -1,1 +1,2 @@
 Name | Date | Time | Guess Count | Word
+Kamil | 07-03-2021 | 03 minutes 12 seconds and 80 milliseconds | 7 | Maseru

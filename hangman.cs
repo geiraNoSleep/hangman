@@ -37,13 +37,13 @@ namespace hangman
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int hangmanCount = 1;
-            int lifePoints = 6;
+            int lifePoints = 7;
             var controler = true;
             var isNotInWord = false;
             var guessControler = false;
             var isInWord = false;
             var guessCount = 0;
+            var wrongs = 0;
             string notInWord = "";
             char[] guess = new char[capital.Length];
 
@@ -82,8 +82,37 @@ namespace hangman
                     }
                     if (isNotInWord == true && isInWord == false)
                     {
+                        wrongs = wrongs + 1;
                         lifePoints = lifePoints - 1;
                         notInWord = notInWord + playerGuess + " ";
+                        if (wrongs == 1)
+                        {
+                            ASCII.hangman1();
+                        }
+                        else if (wrongs == 2)
+                        {
+                            ASCII.hangman2();
+                        }
+                        else if (wrongs == 3)
+                        {
+                            ASCII.hangman3();
+                        }
+                        else if (wrongs == 4)
+                        {
+                            ASCII.hangman4();
+                        }
+                        else if (wrongs == 5)
+                        {
+                            ASCII.hangman5();
+                        }
+                        else if (wrongs == 6)
+                        {
+                            ASCII.hangman6();
+                        }
+                        else if (wrongs == 7)
+                        {
+                            ASCII.hangman7();
+                        }
                     }
                     Console.WriteLine(guess);
                 }
@@ -97,7 +126,7 @@ namespace hangman
                         TimeSpan ts = stopWatch.Elapsed;
                         string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
                         guessCount = guessCount + 1;
-                        Console.WriteLine("You won!");
+                        ASCII.win();
                         Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
                         Console.WriteLine("What's your name?");
                         string name = Console.ReadLine();
@@ -108,8 +137,37 @@ namespace hangman
                     }
                     else if (playerWordGuess != capital)
                     {
+                        wrongs = wrongs + 2;
                         lifePoints = lifePoints - 2;
                         guessControler = true;
+                        if (wrongs == 1)
+                        {
+                            ASCII.hangman1();
+                        }
+                        else if (wrongs == 2)
+                        {
+                            ASCII.hangman2();
+                        }
+                        else if (wrongs == 3)
+                        {
+                            ASCII.hangman3();
+                        }
+                        else if (wrongs == 4)
+                        {
+                            ASCII.hangman4();
+                        }
+                        else if (wrongs == 5)
+                        {
+                            ASCII.hangman5();
+                        }
+                        else if (wrongs == 6)
+                        {
+                            ASCII.hangman6();
+                        }
+                        else if (wrongs == 7)
+                        {
+                            ASCII.hangman7();
+                        }
                     }
                 }
 
@@ -125,7 +183,7 @@ namespace hangman
                     stopWatch.Stop();
                     TimeSpan ts = stopWatch.Elapsed;
                     string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-                    Console.WriteLine("You won!");
+                    ASCII.win();
                     Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
                     Console.WriteLine("What's your name?");
                     string name = Console.ReadLine();
@@ -134,9 +192,10 @@ namespace hangman
                     file.WriteLineAsync(data);
                     controler = false;
                 }
-                else if (lifePoints == 0)
+                else if (lifePoints <= 0)
                 {
-                    Console.WriteLine("You lost! The correct word was {0}", capital);
+                    ASCII.lose();
+                    Console.WriteLine("The correct word was {0}", capital);
                     controler = false;
                 }
             }
