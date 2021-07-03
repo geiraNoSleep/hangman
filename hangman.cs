@@ -65,7 +65,6 @@ namespace hangman
             Random rnd1 = new Random();
 
             var chosenLine = allLines[rnd1.Next(allLines.Length)];
-            Console.WriteLine(chosenLine);
 
             char[] delimiterChars = { '|' };
 
