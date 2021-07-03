@@ -9,6 +9,54 @@ namespace hangman
 {
     class Program
     {
+        static void hangmanAscii(int wrongs)
+        {
+            Generator ASCII = new Generator();
+            if (wrongs == 1)
+            {
+                ASCII.hangman1();
+            }
+            else if (wrongs == 2)
+            {
+                ASCII.hangman2();
+            }
+            else if (wrongs == 3)
+            {
+                ASCII.hangman3();
+            }
+            else if (wrongs == 4)
+            {
+                ASCII.hangman4();
+            }
+            else if (wrongs == 5)
+            {
+                ASCII.hangman5();
+            }
+            else if (wrongs == 6)
+            {
+                ASCII.hangman6();
+            }
+            else if (wrongs == 7)
+            {
+                ASCII.hangman7();
+            }
+        }
+
+        static void winScreen(TimeSpan ts, int guessCount, string capital)
+        {
+            Generator ASCII = new Generator();
+            string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
+
+            string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            guessCount = guessCount + 1;
+            ASCII.win();
+            Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
+            Console.WriteLine("What's your name?");
+            string name = Console.ReadLine();
+            string data = name + " | " + date + " | " + elapsedTime + " | " + guessCount + " | " + capital;
+            using StreamWriter file = new("highscores.txt", append: true);
+            file.WriteLineAsync(data);
+        }
         static void Run()
         {
             var fileLocation = "../hangman/countries_and_capitals.txt";
@@ -29,7 +77,6 @@ namespace hangman
             Console.WriteLine(country);
             Console.WriteLine(capital);
 
-            string date = DateTime.UtcNow.ToString("MM-dd-yyyy");
 
             Generator ASCII = new Generator();
             ASCII.welcome();
@@ -43,7 +90,7 @@ namespace hangman
             var guessControler = false;
             var isInWord = false;
             var guessCount = 0;
-            var wrongs = 0;
+            int wrongs = 0;
             string notInWord = "";
             char[] guess = new char[capital.Length];
 
@@ -66,6 +113,8 @@ namespace hangman
                     isNotInWord = false;
                     Console.WriteLine("Type in your guess:");
                     char playerGuess = char.Parse(Console.ReadLine());
+                    char playerGuessUpper = Char.ToUpper(playerGuess);
+                    int indexOfUpper = capital.IndexOf(playerGuessUpper);
                     for (int j = 0; j < capital.Length; j++)
                     {
                         if (playerGuess == capital[j])
@@ -73,6 +122,10 @@ namespace hangman
                             guess[j] = playerGuess;
                             guessControler = true;
                             isInWord = true;
+                        }
+                        if (indexOfUpper >= 0)
+                        {
+                            guess[indexOfUpper] = playerGuessUpper;
                         }
                         else if (playerGuess != capital[j])
                         {
@@ -85,34 +138,7 @@ namespace hangman
                         wrongs = wrongs + 1;
                         lifePoints = lifePoints - 1;
                         notInWord = notInWord + playerGuess + " ";
-                        if (wrongs == 1)
-                        {
-                            ASCII.hangman1();
-                        }
-                        else if (wrongs == 2)
-                        {
-                            ASCII.hangman2();
-                        }
-                        else if (wrongs == 3)
-                        {
-                            ASCII.hangman3();
-                        }
-                        else if (wrongs == 4)
-                        {
-                            ASCII.hangman4();
-                        }
-                        else if (wrongs == 5)
-                        {
-                            ASCII.hangman5();
-                        }
-                        else if (wrongs == 6)
-                        {
-                            ASCII.hangman6();
-                        }
-                        else if (wrongs == 7)
-                        {
-                            ASCII.hangman7();
-                        }
+                        hangmanAscii(wrongs);
                     }
                     Console.WriteLine(guess);
                 }
@@ -124,15 +150,7 @@ namespace hangman
                     {
                         stopWatch.Stop();
                         TimeSpan ts = stopWatch.Elapsed;
-                        string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-                        guessCount = guessCount + 1;
-                        ASCII.win();
-                        Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
-                        Console.WriteLine("What's your name?");
-                        string name = Console.ReadLine();
-                        string data = name + " | " + date + " | " + elapsedTime + " | " + guessCount + " | " + capital;
-                        using StreamWriter file = new("highscores.txt", append: true);
-                        file.WriteLineAsync(data);
+                        winScreen(ts, guessCount, capital);
                         controler = false;
                     }
                     else if (playerWordGuess != capital)
@@ -140,34 +158,7 @@ namespace hangman
                         wrongs = wrongs + 2;
                         lifePoints = lifePoints - 2;
                         guessControler = true;
-                        if (wrongs == 1)
-                        {
-                            ASCII.hangman1();
-                        }
-                        else if (wrongs == 2)
-                        {
-                            ASCII.hangman2();
-                        }
-                        else if (wrongs == 3)
-                        {
-                            ASCII.hangman3();
-                        }
-                        else if (wrongs == 4)
-                        {
-                            ASCII.hangman4();
-                        }
-                        else if (wrongs == 5)
-                        {
-                            ASCII.hangman5();
-                        }
-                        else if (wrongs == 6)
-                        {
-                            ASCII.hangman6();
-                        }
-                        else if (wrongs == 7)
-                        {
-                            ASCII.hangman7();
-                        }
+                        hangmanAscii(wrongs);
                     }
                 }
 
@@ -182,14 +173,7 @@ namespace hangman
                 {
                     stopWatch.Stop();
                     TimeSpan ts = stopWatch.Elapsed;
-                    string elapsedTime = String.Format("{0:00} minutes {1:00} seconds and {2:00} milliseconds", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-                    ASCII.win();
-                    Console.WriteLine("You guessed capital after {0} guesses and it took you {1}.", guessCount, elapsedTime);
-                    Console.WriteLine("What's your name?");
-                    string name = Console.ReadLine();
-                    string data = name + " | " + date + " | " + elapsedTime + " | " + guessCount + " | " + capital;
-                    using StreamWriter file = new("highscores.txt", append: true);
-                    file.WriteLineAsync(data);
+                    winScreen(ts, guessCount, capital);
                     controler = false;
                 }
                 else if (lifePoints <= 0)
